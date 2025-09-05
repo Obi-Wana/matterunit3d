@@ -5,14 +5,20 @@ import aiohttp
 from datetime import datetime, timedelta
 from . import consts
 from .unit3d import unit3d
+from .unit3d_dev import unit3d_dev
 from .matterbridge import matterbridge
 
 
 class application:
-    def __init__(self, unit3d_cfg, matterbridge_cfg):
-        self.unit3d = unit3d(self, **unit3d_cfg)
+    def __init__(self, unit3d_cfg, unit3d_dev_cfg, matterbridge_cfg, matterbridge_dev_cfg):
         self.matterbridge = matterbridge(self, **matterbridge_cfg)
-        #self.services = [self.unit3d, self.matterbridge]
+
+        # Production
+        self.unit3d = unit3d(self, **unit3d_cfg)
+
+        # Dev
+        self.unit3d_dev = unit3d_dev(self, **unit3d_dev_cfg)
+
         self.services = [self.matterbridge]
         self.running = False
 

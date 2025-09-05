@@ -13,7 +13,7 @@ def main():
     args = arg.parse_args()
     config.read(args.config_path)
     
-    instance = application(config["unit3d"], config["matterbridge"])
+    instance = application(config["unit3d"], config["unit3d_dev"], config["matterbridge"], config["matterbridge_dev"])
     asyncio.run(instance.run())
 
 if __name__ == "__main__":

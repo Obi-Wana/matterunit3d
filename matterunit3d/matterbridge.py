@@ -21,4 +21,8 @@ class matterbridge(service):
                     print(f"(IRC -> Chatbox) [{username}] {message}")
                     self.logger.info(f"(IRC -> Chatbox) [{username}] {message}")
 
-                    await self.app.unit3d.send(msg)
+                    if msg["gateway"] == self.gateway:
+                        await self.app.unit3d.send(msg)
+                    else:
+                        await self.app.unit3d_dev.send(msg)
+
