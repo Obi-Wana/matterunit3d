@@ -33,7 +33,7 @@ class application:
         self.running = True
         async with aiohttp.ClientSession(headers = {"User-Agent": consts.user_agent}) as session:
             self.session = session
-            await asyncio.wait(map(self.loop, self.services))
+            await asyncio.wait([asyncio.create_task(self.loop(service)) for service in self.services])
     
     def shutdown(self):
         self.running = False
